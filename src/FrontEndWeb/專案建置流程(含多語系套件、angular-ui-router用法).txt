@@ -1,0 +1,70 @@
+﻿-----------前置安裝:以下程式或套件在機器安裝一次即可，後續專案不需重複安裝--------------
+
+前置安裝程式:
+UrlRewrite
+cmder
+node.js(裝完須重開機)
+
+前置套件透過cmder安裝:
+npm install -g gulp
+npm install -g bower
+npm install -g yo
+npm install -g generator-angular-gulp-bower
+
+
+-----------以下步驟在建立新專案時需全部執行--------------
+
+1.新增專案Asp.NET Core Web Application(.NET Core) 空白範本
+2.在路徑:「專案名稱\src\專案名稱」的目錄下，滑鼠右鍵，呼叫cmder
+3.cmder執行npm init，後需輸入專案名稱(小寫)，其他欄位皆空白不輸入，按enter跳過，最後輸入yes
+4.cmder執行yo，在Install a generator 選擇Angular Gulp Bower，輸入專案名稱，最後輸入y
+5.cmder執行bower install
+6.cmder執行npm install
+7.cmder執行npm install http-proxy --save-dev
+8.到專案gulp資料夾，修改build.js內容
+   修改return gulp.src('app/styles/*.scss','app/styles/*.css') 改為return gulp.src('app/styles/*.css')
+   移除.pipe($.rubySass({style: 'expanded'}))
+9.cmder執行gulp，看缺少什麼module再使用npm install module名稱逐一安裝
+10.安裝自動注入js套件
+(1)cmder執行npm install gulp-inject
+(2)app目錄下的index.html的<!-- build:js({app,.tmp}) scripts/main.js --><!-- endbuild -->區段中，定義<!-- inject:js --><!-- endinject -->區段
+(inject區段代表自動注入的js要放的地方，build:js區段代表此區段內的js都要被壓縮)
+(3)wiredep.js中增加gulp.task('inject')的function(參考範例專案)，在第二個gulp.src中加入要區段的js的目錄
+(4)重新整理工作執行總管，
+
+-----------使用ng-i18next實現多語系--------------
+
+1.cmd執行bower install angular-sanitize
+2.加入範例專案中的i18next-1.8.0.js、ng-i18next.js、ng-i18next-config.js
+3.修改ng-i18next-config.js，將angular.module名稱更改為符合mainApp.js中angular.module的名稱
+4.在專案的app資料夾下建立locales資料夾，底下再建立各語系資料夾(zh_tw、zh_cn、en_us等等)，各語系資料夾底下再各自建立Translation.json檔案
+5.Translation.json中各自加入{"Main":{"Sample":"XXX"}}的json內容
+5.修改mainApp.js，注入jm.i18next
+6.在layout中引用angular-sanitize.js、i18next-1.8.0.js、ng-i18next.js、ng-i18next-config.js
+7.html使用<div ng-i18next="Main.Sample"></div>進行測試
+
+
+-----------使用angular ui-router實現跳轉頁面--------------
+
+1.cmder執行bower install angular-ui-router
+2.cmder執行npm install connect-modrewrite --save-dev
+3.在app資料夾中新增Web.Config，設定rewrite規則(參考範例專案)
+4.修改gulp資料夾下的server.js, 加入modrewrite並改寫(參考範例專案)
+5.mainApp.js注入ui.router, 改寫myApp.config內容(參考範例專案)
+6.在app資料夾下的index.html加入<base href="/" />標籤，將<div ng-view="">改為<div ui-view="">,並引用angular-ui-router.js
+7.在任一頁面設定連結進行測試
+
+
+
+-------------------------專案發布--------------------------
+
+精神:發布其實就是把專案目錄裡面的檔案複製出來而已，但CSS,JS,圖片可再透過壓縮處理
+
+1.cmder執行安裝壓縮圖片套件
+npm install imagemin-gifsicle
+npm install imagemin-jpegtran
+npm install imagemin-optipng
+npm install imagemin-pngquant
+
+2.build.js中的gulp.task('partials')function，修改gulp.dest，將目錄資料夾.tmp改為dist
+build增加gulp.task('layouts')的function，仿造partials把layouts中的html搬移出來
