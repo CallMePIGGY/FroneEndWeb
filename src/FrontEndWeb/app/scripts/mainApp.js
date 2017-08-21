@@ -32,7 +32,16 @@ myApp.config(['$urlMatcherFactoryProvider', '$stateProvider', '$urlRouterProvide
                 url: '',
                 templateUrl: "partials/index.html",
                 controller: 'IndexController'
-            }];
+            },
+        
+            // 扫地雷游戏
+            {
+                name: 'main.GameMinesweeper',
+                url: 'Game/Minesweeper',
+                templateUrl: "partials/Minesweeper/index.html",
+                controller: 'GameMinesweeperController'
+            }
+        ];
 
         angular.forEach(route, function (obj) {
             $stateProvider.state(obj);

@@ -1,0 +1,7 @@
+<table class="minefield" border="1">
+    <tr ng-repeat="row in minefield.rows">
+        <td ng-repeat="spot in row.spots" ng-click="uncoverSpot(spot)">
+            <mine-grid></mine-grid>
+        </td>
+    </tr>
+</table>
