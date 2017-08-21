@@ -41,6 +41,7 @@
   },
   "scripts": {
     "prestart": "npm install & bower install",
-    "start": "gulp clean && gulp build && gulp serve"
+    "start": "gulp clean && gulp build && gulp serve",
+    "test": "karma start karma.conf.js"
   }
 }
