@@ -242,5 +242,7 @@ ModelManifest.xml
 .fake/
 /src/FrontEndWeb/node_modules
 /src/FrontEndWeb/app/bower_components
+/src/FrontEndWeb/coverage
 /src/FrontEndWeb/dist
+/src/FrontEndWeb/test
 
