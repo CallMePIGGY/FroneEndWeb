@@ -25,7 +25,25 @@
                 }
                 minefield.rows.push(row);
             }
+            this.placeManyRandomMines(minefield);
             return minefield;
+        }
+
+        this.placeRandomMine = function (minefield) {
+            var row = Math.round(Math.random() * 8);
+            var column = Math.round(Math.random() * 8);
+            var spot = this.getSpot(minefield, row, column);
+            spot.content = "mine";
+        }
+
+        this.getSpot = function (minefield, row, column) {
+            return minefield.rows[row].spots[column];
+        }
+
+        this.placeManyRandomMines = function (minefield) {
+            for (var i = 0; i < 10; i++) {
+                this.placeRandomMine(minefield);
+            }
         }
     }
 })();

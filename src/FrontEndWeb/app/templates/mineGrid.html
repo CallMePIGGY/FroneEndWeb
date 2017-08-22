@@ -1,2 +1,3 @@
 <img ng-if="spot.isCovered && spot.flag=='none'" src="../images/minesweeper/covered.png" />
-<img ng-if="!spot.isCovered && spot.flag=='empty'" src="../images/minesweeper/empty.png" />
+<img ng-if="!spot.isCovered && spot.content=='empty'" src="../images/minesweeper/empty.png" />
+<img ng-if="!spot.isCovered && spot.content=='mine'" src="../images/minesweeper/mine.png" />
