@@ -141,5 +141,19 @@
                 thisSpot.content = mineCount;
             }
         }
+
+        this.hasWon = function (minefield) {
+            for (var y = 0; y < 9; y++) {
+                for (var x = 0; x < 9; x++) {
+
+                    var spot = this.getSpot(minefield, y, x);
+
+                    if (spot.isCovered && spot.content != "mine") {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 })();
