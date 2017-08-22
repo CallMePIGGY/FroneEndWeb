@@ -7,10 +7,10 @@
 
     function mineGrid() {
 
-        return{
-            restrict:'E',
-            replace:false,
-            templateUrl:'../templates/mineGrid.html'
+        return {
+            restrict: 'E',
+            replace: false,
+            templateUrl: '../templates/mineGrid.html'
         }
     }
 })();
