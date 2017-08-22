@@ -155,5 +155,49 @@
             }
             return true;
         }
+
+        this.unoverEmptySpot = function (minefield, spot) {
+            var x = spot.x;
+            var y = spot.y;
+            spot.isCovered = false;
+            if (spot.content == "empty") {
+                if (y - 1 >= 0) {
+                    var topSpot = this.getSpot(minefield, x, y - 1);
+                    if (topSpot.isCovered == true) {
+                        this.unoverEmptySpot(minefield, topSpot);
+                    }
+                }
+
+                if (x - 1 >= 0) {
+                    var leftSpot = this.getSpot(minefield, x - 1, y);
+                    if (leftSpot.isCovered == true) {
+                        this.unoverEmptySpot(minefield, leftSpot);
+                    }
+                }
+
+                if (y + 1 < 9) {
+                    var bottomSpot = this.getSpot(minefield, x, y + 1);
+                    if (bottomSpot.isCovered == true) {
+                        this.unoverEmptySpot(minefield, bottomSpot);
+                    }
+                }
+
+                if (x + 1 < 9) {
+                    var rightSpot = this.getSpot(minefield, x + 1, y);
+                    if (rightSpot.isCovered == true) {
+                        this.unoverEmptySpot(minefield, rightSpot);
+                    }
+                }
+            }
+        }
+
+        this.uncoverAllSpot = function (minefield) {
+            for (var y = 0; y < 9; y++) {
+                for (var x = 0; x < 9; x++) {
+                    var spot = this.getSpot(minefield, y, x);
+                    spot.isCovered = false;
+                }
+            }
+        }
     }
 })();

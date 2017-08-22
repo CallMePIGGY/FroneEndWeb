@@ -21,11 +21,14 @@
                 return;
             }
             spot.isCovered = false;
+            mineFieldService.unoverEmptySpot($scope.minefield, spot);
             if (spot.content == "mine") {
                 $scope.isLostMessageVisible = true;
+                mineFieldService.uncoverAllSpot($scope.minefield);
             } else {
                 if (mineFieldService.hasWon($scope.minefield)) {
                     $scope.isWinMessageVisible = true;
+                    mineFieldService.uncoverAllSpot($scope.minefield);
                 }
             }
         }
