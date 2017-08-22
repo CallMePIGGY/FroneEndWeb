@@ -38,7 +38,7 @@ myApp.config(['$urlMatcherFactoryProvider', '$stateProvider', '$urlRouterProvide
             {
                 name: 'main.GameMinesweeper',
                 url: 'Game/Minesweeper',
-                templateUrl: "partials/Minesweeper/index.html",
+                templateUrl: "partials/Game/Minesweeper/Minesweeper.html",
                 controller: 'GameMinesweeperController'
             }
         ];

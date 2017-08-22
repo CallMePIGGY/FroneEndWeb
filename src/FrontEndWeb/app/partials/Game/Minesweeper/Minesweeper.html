@@ -1,3 +1,13 @@
+<style>
+    .minefield {
+        line-height: 0;
+        border-spacing: 0;
+    }
+    .minefield td {
+        padding: 0
+    }
+</style>
+
 <table class="minefield" border="1">
     <tr ng-repeat="row in minefield.rows">
         <td ng-repeat="spot in row.spots" ng-click="uncoverSpot(spot)" ng-right-click="setFlag(spot)">
