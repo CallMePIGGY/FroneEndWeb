@@ -45,6 +45,17 @@ gulp.task('layouts', function () {
       .pipe($.size());
 });
 
+gulp.task('templates', function () {
+  return gulp.src('app/templates/**/*.html')
+    .pipe($.minifyHtml({
+        empty: true,
+        spare: true,
+        quotes: true
+    }))
+    .pipe(gulp.dest("dist/templates"))
+    .pipe($.size());
+});
+
 gulp.task('copy', function () {
     gulp.src(['app/Web.config'])
         .pipe(gulp.dest('dist'))
@@ -58,7 +69,7 @@ gulp.task('copy', function () {
       .pipe($.size());
 });
 
-gulp.task('html', ['styles', 'scripts', 'partials', 'layouts','copy'], function () {
+gulp.task('html', ['styles', 'scripts', 'partials', 'layouts','templates', 'copy'], function () {
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
 
