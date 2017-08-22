@@ -34,12 +34,28 @@ myApp.config(['$urlMatcherFactoryProvider', '$stateProvider', '$urlRouterProvide
                 controller: 'IndexController'
             },
         
-            // 扫地雷游戏
+            // 游戏-扫地雷
             {
-                name: 'main.GameMinesweeper',
+                name: 'main.gameMinesweeper',
                 url: 'Game/Minesweeper',
-                templateUrl: "partials/Game/Minesweeper/Minesweeper.html",
+                templateUrl: "partials/game/minesweeper/minesweeper.html",
                 controller: 'GameMinesweeperController'
+            },
+
+            // 客户管理系统-新增客户
+            {
+                name: 'main.addCustomer',
+                url: 'CMS/AddCustomer',
+                templateUrl: "partials/cms/customers/addCustomer.html",
+                controller: 'CMSAddCustomerController'
+            },
+
+            // 客户管理系统-客户列表
+            {
+                name: 'main.customers',
+                url: 'CMS/Customers',
+                templateUrl: "partials/cms/customers/customers.html",
+                controller: 'CMSCustomersController'
             }
         ];
 
