@@ -39,5 +39,11 @@
                 spot.flag = "none";
             }
         }
+
+        $scope.restart = function () {
+            $scope.minefield = mineFieldService.createMinefield();
+            $scope.isWinMessageVisible = false;
+            $scope.isLostMessageVisible = false;
+        }
     }
 })();
