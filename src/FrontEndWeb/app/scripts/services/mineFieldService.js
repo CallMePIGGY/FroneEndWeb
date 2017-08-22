@@ -26,6 +26,7 @@
                 minefield.rows.push(row);
             }
             this.placeManyRandomMines(minefield);
+            this.calculateAllNumbers(minefield);
             return minefield;
         }
 
@@ -43,6 +44,101 @@
         this.placeManyRandomMines = function (minefield) {
             for (var i = 0; i < 10; i++) {
                 this.placeRandomMine(minefield);
+            }
+        }
+
+        this.calculateAllNumbers = function (minefield) {
+            for (var y = 0; y < 9; y++) {
+                for (var x = 0; x < 9; x++) {
+                    this.calculateNumber(minefield, x, y);
+                }
+            }
+        }
+
+        this.calculateNumber = function (minefield, row, column) {
+            var thisSpot = this.getSpot(minefield, row, column);
+
+            //如果方格为地雷，则不可在方格中添加数字
+            if (thisSpot.content == "mine") {
+                return;
+            }
+
+            var mineCount = 0;
+
+            //如果不是第一行，则检查上一行
+            if (row > 0) {
+                //如果不是第一列，则检查左边的列
+                if (column > 0) {
+                    //左上角
+                    var spot = this.getSpot(minefield, row - 1, column - 1);
+                    if (spot.content == "mine") {
+                        mineCount++;
+                    }
+                }
+
+                //正上方
+                var spot = this.getSpot(minefield, row - 1, column);
+
+                if (spot.content == "mine") {
+                    mineCount++;
+                }
+
+                //如果不是最后一列，则检查右边的列
+                if (column < 8) {
+                    //右上角
+                    var spot = this.getSpot(minefield, row - 1, column + 1);
+                    if (spot.content == "mine") {
+                        mineCount++;
+                    }
+                }
+            }
+
+            //如果不是第一列，则检查左侧列
+            if (column > 0) {
+                //左侧
+
+                var spot = this.getSpot(minefield, row, column - 1);
+                if (spot.content == "mine") {
+                    mineCount++;
+                }
+            }
+
+            //如果不是最后一列，则检查右侧列
+            if (column < 8) {
+                //右侧
+                var spot = this.getSpot(minefield, row, column + 1);
+                if (spot.content == "mine") {
+                    mineCount++;
+                }
+            }
+
+            //如果不是最后一行，则检查下一行
+            if (row < 8) {
+                //如果不是第一列，则检查左边的列
+                if (column > 0) {
+                    var spot = this.getSpot(minefield, row + 1, column - 1);
+                    if (spot.content == "mine") {
+                        mineCount++;
+                    }
+                }
+
+                //正下方
+                var spot = this.getSpot(minefield, row + 1, column);
+                if (spot.content == "mine") {
+                    mineCount++;
+                }
+
+                //如果不是最后一列，则检查右边的列
+                if (column < 8) {
+                    var spot = this.getSpot(minefield, row + 1, column + 1);
+                    if (spot.content == "mine") {
+                        mineCount++;
+                    }
+                }
+            }
+
+            if (mineCount > 0) {
+                thisSpot.content = mineCount;
             }
         }
     }
