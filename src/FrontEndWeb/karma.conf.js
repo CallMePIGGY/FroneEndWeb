@@ -20,6 +20,7 @@ module.exports = function(config) {
       "app/bower_components/angular-resource/angular-resource.js",
       "app/bower_components/angular-ui-router/release/angular-ui-router.js",
       "app/bower_components/angular-cookies/angular-cookies.js",
+      "app/bower_components/angular-mocks/angular-mocks.js",
       "app/scripts/js/jquery-ui.min.js",
       "app/scripts/js/bootstrap.min.js",
       "app/scripts/js/libs/jquery-knob/jquery.knob.js",
